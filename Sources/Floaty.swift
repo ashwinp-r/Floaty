@@ -842,6 +842,13 @@ open class Floaty: UIView {
   @objc open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
     if isTouched(touches) {
+		if #available(iOS 10.0, *) {
+            let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+            feedbackGenerator.prepare()
+            feedbackGenerator.impactOccurred()
+        } else {
+            // Do nothing.
+        }
       setTintLayer()
     }
   }
